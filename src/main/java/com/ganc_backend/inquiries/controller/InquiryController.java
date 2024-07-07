@@ -1,5 +1,6 @@
 package com.ganc_backend.inquiries.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -8,13 +9,10 @@ import com.ganc_backend.inquiries.service.InquiryService;
 
 @RestController
 @RequestMapping("/inquiries")
+@RequiredArgsConstructor
 public class InquiryController {
 
     private final InquiryService inquiryService;
-
-    public InquiryController(InquiryService inquiryService) {
-        this.inquiryService = inquiryService;
-    }
 
     @PostMapping
     public Mono<Inquiry> createInquiry(@RequestBody Inquiry inquiry) {

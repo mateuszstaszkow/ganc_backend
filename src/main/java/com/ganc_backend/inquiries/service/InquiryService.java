@@ -1,5 +1,6 @@
 package com.ganc_backend.inquiries.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -10,13 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class InquiryService {
 
     private final InquiryRepository inquiryRepository;
-
-    public InquiryService(InquiryRepository inquiryRepository) {
-        this.inquiryRepository = inquiryRepository;
-    }
 
     @Transactional
     public Mono<Inquiry> createInquiry(Inquiry inquiry) {
