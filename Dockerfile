@@ -1,13 +1,23 @@
-# Use an official OpenJDK runtime as a parent image
+# Stage 1: Build the application
+FROM gradle:7.4.2-jdk11 as builder
+
+WORKDIR /home/gradle/project
+
+# Copy the build files
+COPY --chown=gradle:gradle . /home/gradle/project
+
+# Build the application
+RUN gradle build --no-daemon
+
+# Stage 2: Create the runtime image
 FROM openjdk:22-jdk-slim
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY build/libs/*.jar app.jar
+# Copy the jar file from the build stage
+COPY --from=builder /home/gradle/project/build/libs/*.jar app.jar
 
-# Make port 8080 available to the world outside this container
+# Expose the port the app runs on
 EXPOSE 8080
 
 # Run the jar file
