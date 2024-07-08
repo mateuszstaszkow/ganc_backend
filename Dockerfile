@@ -4,9 +4,6 @@ FROM openjdk:22-jdk-slim
 # Set the working directory
 WORKDIR /app
 
-RUN echo pwd
-RUN echo ls -l
-
 # Copy the current directory contents into the container at /app
 COPY build/libs/*.jar app.jar
 
