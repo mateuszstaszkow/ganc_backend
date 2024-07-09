@@ -6,6 +6,10 @@ WORKDIR /home/app
 
 # Copy the current directory contents into the container at /app
 COPY /home/app/build/libs/*.jar /usr/local/lib/app.jar
+RUN pwd > x1
+RUN ls > x2
+RUN cat ./x1
+RUN cat ./x2
 
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
